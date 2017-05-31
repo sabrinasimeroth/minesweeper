@@ -1,16 +1,21 @@
 <!DOCTYPE <html>
-<html ng-app>
+<html>
     <head>
         <script
         src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js">          
         </script>
-        <script>
-            function MinesweeperController(){
-
-            };
-        </script>
+        <script src="./src/app/Minesweeper.controller.js"></script>
     </head>
-    <body ng-controller="MinesweeperController">
-        
+    <body ng-app>
+        <div ng-controller="MinesweeperController">
+            <table class="minefield" border="1">
+                <tr ng-repeat="row in minefield.rows">
+                    <td ng-repeat="spot in row.spots" ng-click="spot.isCovered = false">
+                    <img ng-if="spot.isCovered" src="../src/images/covered.png"/>
+                    <img ng-if="!spot.isCovered" src="../src/images/empty.png">
+                    </td>
+                </tr>
+            </table>
+        </div>
     </body>
 </html>

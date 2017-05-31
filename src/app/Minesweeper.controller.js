@@ -1,29 +1,23 @@
-(function() {
-    'use strict';
+function createMinefield() {
+  var minefield = {};
+  minefield.rows = [];
 
-    angular
-        .module('app')
-        .controller('minesweeperController', minesweeperController); 
-        
-        minesweeperController.$inject = [];
+  for (var i = 0; i < 9; i++) {
+    var row = {};
+    row.spots = [];
 
-        function minesweeperController() {
-            var vm = this;
-            var minefield = {};
-            minefield.rows = [];
+    for (var j = 0; j < 9; j++) {
+      var spot = {};
+      spot.isCovered = true;
+      row.spots.push(spot);
+    }
 
-            for(var i = 0; i < 9; i++) {
-                var row = {};
-                row.spots = [];
+    minefield.rows.push(row);
+  }
 
-                for(var j = 0; j < 9; j++) {
-                    var spot = {};
-                    spot.isRevealed = false;
-                    row.spots.push(spot);
-                }
+  return minefield;
+}
 
-                minefield.rows.push(row);
-            }
-            return minefield;
-        }
-})();
+function MinesweeperController($scope) {
+  $scope.minefield = createMinefield();
+}
