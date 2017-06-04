@@ -117,6 +117,33 @@ function calculateAllNumbers(minefield) {
   }
 }
 
+function hasWon(minefield) {
+  for(var y = 0; y < 9; y++) {
+    for(var x = 0; x < 9; x++) {
+      var spot = getSpot(minefield, y, x);
+      if(spot.isCovered && spot.content != "mine") {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+
+
 function MinesweeperController($scope) {
   $scope.minefield = createMinefield();
+  
+  $scope.uncoverSpot = function(spot) {
+    spot.isCovered = false;
+
+    if(spot.content == "mine") {
+      $scope.hasLostMessageVisible = true;
+    } else {
+      if(hasWon($scope.minefield)) {
+        $scope.isWinMessageVisible = true;
+      }
+    }   
+  }; 
 }
